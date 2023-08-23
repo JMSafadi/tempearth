@@ -1,13 +1,13 @@
-// import fetchWeatherQueries from "@/graphql/queries/fetchWeatherQueries"
-import { getClient } from "@/apollo-client";
-import CalloutCard from "@/components/CalloutCard";
-import HumidityChart from "@/components/HumidityChart";
-import InformationPanel from "@/components/InformationPanel";
-import RainChart from "@/components/RainChart";
-import StatCard from "@/components/StatCard";
-import TempChart from "@/components/TempChart";
-import fetchWeatherQueries from "@/graphql/queries/fetchWeatherQueries";
-import { useQuery } from "@apollo/client";
+import { getClient } from "@/apollo-client"
+import CalloutCard from "@/components/CalloutCard"
+import HumidityChart from "@/components/HumidityChart"
+import InformationPanel from "@/components/InformationPanel"
+import RainChart from "@/components/RainChart"
+import StatCard from "@/components/StatCard"
+import TempChart from "@/components/TempChart"
+import fetchWeatherQueries from "@/graphql/queries/fetchWeatherQueries"
+
+export const revalidate = 60
 
 type Props = {
   params: {
