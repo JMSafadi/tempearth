@@ -1,8 +1,11 @@
 // import fetchWeatherQueries from "@/graphql/queries/fetchWeatherQueries"
 import { getClient } from "@/apollo-client";
 import CalloutCard from "@/components/CalloutCard";
+import HumidityChart from "@/components/HumidityChart";
 import InformationPanel from "@/components/InformationPanel";
+import RainChart from "@/components/RainChart";
 import StatCard from "@/components/StatCard";
+import TempChart from "@/components/TempChart";
 import fetchWeatherQueries from "@/graphql/queries/fetchWeatherQueries";
 import { useQuery } from "@apollo/client";
 
@@ -78,7 +81,7 @@ async function weatherPage({ params: { city, lat, long } }: Props) {
           <div className="flex space-x-3 ">
             <StatCard
                 title="Wind Speed"
-                metric={`${results.current_weather.windspeed.toFixed(1)}m/s`}
+                metric={`${results.current_weather.windspeed.toFixed(1)}km/h`}
                 color="green"
                 />
             <StatCard
@@ -92,8 +95,11 @@ async function weatherPage({ params: { city, lat, long } }: Props) {
         <hr className="mb-5"/>
         <div className="space-y-3">
           {/* TempChart */}
+          <TempChart results={results} />
           {/* RainChart */}
+          <RainChart results={results} />
           {/* HumidityChart */}
+          <HumidityChart results={results} />
         </div>
       </div>
     </div>
