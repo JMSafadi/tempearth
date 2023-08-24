@@ -6,6 +6,9 @@ import RainChart from "@/components/RainChart"
 import StatCard from "@/components/StatCard"
 import TempChart from "@/components/TempChart"
 import fetchWeatherQueries from "@/graphql/queries/fetchWeatherQueries"
+import cleanData from "@/lib/cleanData"
+import getBasePath from "@/lib/getBasePath"
+import Image from "next/image"
 
 export const revalidate = 60
 
@@ -19,7 +22,6 @@ type Props = {
 
 async function weatherPage({ params: { city, lat, long } }: Props) {
   const client = getClient()
-
   const { data } = await client.query({
     query: fetchWeatherQueries,
     variables: {
@@ -29,10 +31,29 @@ async function weatherPage({ params: { city, lat, long } }: Props) {
       timezone: 'GMT'
     }
   })
-
   const results: Root = data.myQuery
 
+  // const dataToSend = cleanData(results, city)
+
+  // const url = getBasePath()
+
+  // const res = await fetch(`${url}/api/getWeatherSummary`, {
+  //   method: 'POST',
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   },
+  //   body: JSON.stringify({
+  //     weatherData: dataToSend
+  //   })
+  // })
+
+  // const GPTdata = await res.json()
+  // const { content } = GPTdata
+  // console.log(content)
+
   return (
+    <>
+    
     <div className="flex flex-col min-h-screen md:flex-row">
       {/* Information Panel */}
       <InformationPanel
@@ -52,7 +73,7 @@ async function weatherPage({ params: { city, lat, long } }: Props) {
           </div>
           <div className="m-2 mb-10">
             <CalloutCard 
-              message="This is where GPT summary will go"/>
+              message='Coming soon, there will be a weather summary here!'/>
           </div>
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 m-2 ">
             <StatCard 
@@ -103,6 +124,18 @@ async function weatherPage({ params: { city, lat, long } }: Props) {
         </div>
       </div>
     </div>
+    <footer className='bg-sky-500 text-xl text-center p-5 text-black'>
+    Developed by Julian Safadi
+    <div className='flex justify-center items-center gap-2 mt-2'>
+      <a href='https://github.com/JMSafadi' target='_blank'>
+        <Image src='/github.png' width={20} height={20} alt='github'/>
+      </a>
+      <a href='https://www.linkedin.com/in/juliansafadi' target='_blank'>
+        <Image src='/LinkedIn_icon.svg.png' width={20} height={20} alt='linkedin'/>
+      </a>
+    </div>
+    </footer>
+    </>
   )
 }
 
